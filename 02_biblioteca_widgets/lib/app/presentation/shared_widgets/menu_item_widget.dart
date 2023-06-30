@@ -12,11 +12,18 @@ class MenuItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return ListTile(
       title: Text(menuItem.title),
       subtitle: Text(menuItem.subTitle),
-      leading: Icon(menuItem.leadingIcon),
-      trailing: const Icon(Icons.chevron_right_outlined),
+      leading: Icon(
+        menuItem.leadingIcon,
+        color: colors.primary,
+      ),
+      trailing: Icon(
+        Icons.chevron_right_outlined,
+        color: colors.primary,
+      ),
       onTap: () {
         //Navegacion 1.0
         Navigator.push(
