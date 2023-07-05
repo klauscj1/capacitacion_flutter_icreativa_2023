@@ -17,6 +17,8 @@ class MenuItemModel {
   final Widget screen;
 }
 
+//TODO: Tarea ingresar las opciones dentro del menu principal para las paginas de
+// Progress Indicator, Animated, UI controls, Onboarding, infinite scroll y sus debidos screen
 final menuItems = [
   MenuItemModel(
     title: "Botones",
@@ -31,7 +33,7 @@ final menuItems = [
     screen: const CardsScreen(),
   ),
   MenuItemModel(
-    title: "Dialgos",
+    title: "Snackbars & Dialgos",
     subTitle: "Ejemplos de dialogs",
     leadingIcon: Icons.info,
     screen: const DialogsScreen(),

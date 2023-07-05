@@ -1,3 +1,7 @@
+import 'package:biblioteca_widgets/app/presentation/shared_widgets/card_type_1.dart';
+import 'package:biblioteca_widgets/app/presentation/shared_widgets/card_type_2.dart';
+import 'package:biblioteca_widgets/app/presentation/shared_widgets/card_type_3.dart';
+import 'package:biblioteca_widgets/app/presentation/shared_widgets/card_type_4.dart';
 import 'package:flutter/material.dart';
 
 const cards = <Map<String, dynamic>>[
@@ -10,7 +14,6 @@ const cards = <Map<String, dynamic>>[
   {"elevation": 6.0, "label": "Elevation 6.0"},
 ];
 
-//TODO: Tarea: dibujar dinamicamente un Card por cada item del list cards
 class CardsScreen extends StatelessWidget {
   const CardsScreen({super.key});
 
@@ -20,13 +23,26 @@ class CardsScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Cards"),
       ),
-      // body: Column(
-      //   children: [],
-      // ),
-      body: const Card(
-        child: Padding(
-          child: const Text("Card..."),
-          padding: EdgeInsets.all(30),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            ...cards.map(
+              (itemCard) => CardType1(
+                  elevation: itemCard['elevation'], label: itemCard["label"]),
+            ),
+            ...cards.map(
+              (itemCard) => CardType2(
+                  elevation: itemCard['elevation'], label: itemCard["label"]),
+            ),
+            ...cards.map(
+              (itemCard) => CardType3(
+                  elevation: itemCard['elevation'], label: itemCard["label"]),
+            ),
+            ...cards.map(
+              (itemCard) => CardType4(
+                  elevation: itemCard['elevation'], label: itemCard["label"]),
+            ),
+          ],
         ),
       ),
     );

@@ -70,9 +70,9 @@ class BotonesScreen extends StatelessWidget {
               iconColor: const MaterialStatePropertyAll(Colors.white),
             ),
           ),
-          //TODO: Tarea mostrar el boton unicamente redondo -> ClipRRect
           //custom button
           InkWell(
+            borderRadius: BorderRadius.circular(44),
             onTap: () {
               print("custom button clicked");
             },
