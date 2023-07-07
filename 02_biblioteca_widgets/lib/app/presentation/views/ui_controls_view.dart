@@ -11,6 +11,9 @@ enum Transportation { carro, avion, bote, submarino }
 
 class _UiControlsViewState extends State<UiControlsView> {
   bool isDeveloper = true;
+  bool addFood = false;
+  bool addLuch = false;
+  bool addDinner = false;
   Transportation selectedTransportation = Transportation.carro;
 
   @override
@@ -75,8 +78,34 @@ class _UiControlsViewState extends State<UiControlsView> {
                 });
               },
             ),
-            //TODO: Tarea es utilizar el widget CheckboxListTile con 3 ejemplos
           ],
+        ),
+        CheckboxListTile(
+          onChanged: (value) {
+            addFood = value!;
+            // addFood = !addFood;
+            setState(() {});
+          },
+          title: const Text("Incluir desyuno"),
+          value: addFood,
+        ),
+        CheckboxListTile(
+          onChanged: (value) {
+            addLuch = value!;
+            // addFood = !addFood;
+            setState(() {});
+          },
+          title: const Text("Incluir almuerzo"),
+          value: addLuch,
+        ),
+        CheckboxListTile(
+          onChanged: (value) {
+            addDinner = value!;
+            // addFood = !addFood;
+            setState(() {});
+          },
+          title: const Text("Incluir cena"),
+          value: addDinner,
         ),
       ],
     );
