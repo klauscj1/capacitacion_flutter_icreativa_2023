@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:state_management/presentation/screens/change_theme/change_theme_screen.dart';
 import 'package:state_management/presentation/screens/change_theme_stateful/change_theme_stateful_screen.dart';
+import 'package:state_management/presentation/screens/counter/counter_screen.dart';
+import 'package:state_management/presentation/screens/login/login_screen.dart';
 
 class MenuScreen extends StatelessWidget {
   const MenuScreen({
@@ -34,6 +36,28 @@ class MenuScreen extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => const ChangeThemeScreen(),
+                  ));
+            },
+          ),
+          ListTile(
+            title: const Text("Counter"),
+            subtitle: const Text("Utilizando flutter meedu"),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CounterScreen(),
+                  ));
+            },
+          ),
+          ListTile(
+            title: const Text("Login"),
+            subtitle: const Text("Utilizando flutter meedu"),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LoginScreen(),
                   ));
             },
           ),

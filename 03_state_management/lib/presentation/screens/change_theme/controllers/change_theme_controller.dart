@@ -2,7 +2,7 @@ import 'package:flutter_meedu/meedu.dart';
 
 class ChangeThemeController extends SimpleNotifier {
   //Variables
-  bool _isDark = false;
+  bool _isDark = true;
 
   //Metodos get
   bool get isDark => _isDark;
