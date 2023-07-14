@@ -3,6 +3,7 @@ import 'package:biblioteca_widgets/app/presentation/screens/botones_screen.dart'
 import 'package:biblioteca_widgets/app/presentation/screens/cards_screen.dart';
 import 'package:biblioteca_widgets/app/presentation/screens/dialogs_screen.dart';
 import 'package:biblioteca_widgets/app/presentation/screens/infinite_scroll_screen.dart';
+import 'package:biblioteca_widgets/app/presentation/screens/onboarding_meedu_screen.dart';
 import 'package:biblioteca_widgets/app/presentation/screens/onboarding_screen.dart';
 import 'package:biblioteca_widgets/app/presentation/screens/progress_indicator_screen.dart';
 import 'package:biblioteca_widgets/app/presentation/screens/ui_control_screen.dart';
@@ -70,5 +71,11 @@ final menuItems = [
     subTitle: "Ejemplos de dialogs",
     leadingIcon: Icons.list,
     screen: const InfiniteScrollScreen(),
+  ),
+  MenuItemModel(
+    title: "Onboarding",
+    subTitle: "Flutter_meedu",
+    leadingIcon: Icons.offline_bolt_sharp,
+    screen: const OnboardingMeeduScreen(),
   ),
 ];

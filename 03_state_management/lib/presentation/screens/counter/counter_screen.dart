@@ -11,7 +11,6 @@ class CounterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("dibuja build");
     return Scaffold(
       appBar: AppBar(),
       body: Center(

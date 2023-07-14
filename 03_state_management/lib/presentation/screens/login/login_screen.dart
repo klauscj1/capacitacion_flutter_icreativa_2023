@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_meedu/meedu.dart';
+import 'package:flutter_meedu/ui.dart';
+import 'package:state_management/presentation/screens/login/controllers/login_controller.dart';
+
+final loginProvider = SimpleProvider((ref) => LoginController());
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
-//TODO: Crearse un estado (controllador) que tenga las variables para almacenar el dato de correo electronico y contraseña
-//TODO: Crearse un proveeedor para el estado
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,16 +21,14 @@ class LoginScreen extends StatelessWidget {
             children: [
               TextField(
                 onChanged: (value) {
-                  //TODO: CAMBIAR EL VALOR DE CORREO EN EL ESTADO
-                  print(value);
+                  loginProvider.read.email = value;
                 },
                 decoration:
                     const InputDecoration(hintText: "Correo electrónico"),
               ),
               TextField(
                 onChanged: (value) {
-                  //TODO: CAMBIAR EL VALOR DE CONTRASENA EN EL ESTADO
-                  print(value);
+                  loginProvider.read.password = value;
                 },
                 decoration: const InputDecoration(hintText: "Contreña"),
               ),
@@ -35,11 +36,22 @@ class LoginScreen extends StatelessWidget {
                 height: 40,
               ),
               Center(
-                child: FilledButton(
-                  onPressed: () {
-                    //TODO: Crear un metodo en el estado que me permita revisar el valor de las variables de correo y contraseña
+                child: Consumer(
+                  builder: (context, ref, child) {
+                    print("build consumer del boton");
+                    final isValid = ref
+                        .watch(loginProvider
+                            .select((controller) => controller.isValid))
+                        .isValid;
+                    return FilledButton(
+                      onPressed: isValid
+                          ? () {
+                              loginProvider.read.submit();
+                            }
+                          : null,
+                      child: const Text("Login"),
+                    );
                   },
-                  child: const Text("Login"),
                 ),
               )
             ],
