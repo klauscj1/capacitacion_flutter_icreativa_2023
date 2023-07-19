@@ -3,6 +3,7 @@ import 'package:state_management/presentation/screens/change_theme/change_theme_
 import 'package:state_management/presentation/screens/change_theme_stateful/change_theme_stateful_screen.dart';
 import 'package:state_management/presentation/screens/counter/counter_screen.dart';
 import 'package:state_management/presentation/screens/login/login_screen.dart';
+import 'package:state_management/presentation/screens/posts/posts_screen.dart';
 
 class MenuScreen extends StatelessWidget {
   const MenuScreen({
@@ -59,6 +60,19 @@ class MenuScreen extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (context) => const LoginScreen(),
                   ));
+            },
+          ),
+          ListTile(
+            title: const Text("Post"),
+            subtitle: const Text("Servicios por http"),
+            onTap: () {
+              postsProvider.read.loadPosts();
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const PostsScreen(),
+                ),
+              );
             },
           ),
         ],
