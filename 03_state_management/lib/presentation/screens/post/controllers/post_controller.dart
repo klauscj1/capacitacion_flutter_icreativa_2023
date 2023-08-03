@@ -10,15 +10,21 @@ class PostController extends SimpleNotifier {
   List<CommentModel> comments = [];
 
   void setPost(Post post) {
+    comments = [];
+    user = null;
     this.post = post;
+    loadCommets();
+    loadUser();
   }
 
   void loadCommets() async {
+    await Future.delayed(const Duration(seconds: 2));
     comments = await PostPlaceHolderDatasource().loadCommentsByPost(post.id);
     notify();
   }
 
   void loadUser() async {
+    await Future.delayed(const Duration(seconds: 2));
     user = await PostPlaceHolderDatasource().loadUserPost(post.userId);
     notify();
   }

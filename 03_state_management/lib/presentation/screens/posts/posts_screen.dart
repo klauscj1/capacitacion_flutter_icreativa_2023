@@ -39,8 +39,6 @@ class PostsScreen extends StatelessWidget {
                     return ListTile(
                       onTap: () {
                         postProvider.read.setPost(post);
-                        postProvider.read.loadUser();
-                        postProvider.read.loadCommets();
                         Navigator.push(
                             context,
                             MaterialPageRoute(
