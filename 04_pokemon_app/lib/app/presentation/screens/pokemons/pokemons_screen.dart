@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_meedu/meedu.dart';
 import 'package:flutter_meedu/ui.dart';
 import 'package:pokemon_app/app/presentation/screens/pokemons/controllers/pokemons_controller.dart';
+import 'package:pokemon_app/app/presentation/views/pokemons_grid_view.dart';
 import 'package:pokemon_app/app/presentation/views/pokemons_list_view.dart';
 
 final pokemonsProvider = SimpleProvider((ref) => PokemonsController());
@@ -52,23 +53,9 @@ class PokemonsScreen extends StatelessWidget {
       body: Center(child: Consumer(
         builder: (_, ref, __) {
           final controller = ref.watch(pokemonsProvider);
-
           return controller.showList
               ? PokemonsListView(pokemons: controller.pokemons)
-              : GridView.count(
-                  crossAxisCount: 2,
-                  children: controller.pokemons
-                      .map((e) => Column(
-                            children: [
-                              Image.network(
-                                e.imagenFrontUrl,
-                              ),
-                              Text(e.nombre),
-                              Text(e.id.toString()),
-                            ],
-                          ))
-                      .toList(),
-                );
+              : PokemonGridView(pokemons: controller.pokemons);
         },
       )),
     );

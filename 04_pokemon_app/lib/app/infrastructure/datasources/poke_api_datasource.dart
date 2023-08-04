@@ -1,4 +1,5 @@
 import 'package:pokemon_app/app/domain/datasources/pokemons_datasource.dart';
+import 'package:pokemon_app/app/domain/models/pokemon_detail_model.dart';
 import 'package:pokemon_app/app/domain/models/pokemon_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:pokemon_app/app/infrastructure/mappers/pokeapi_to_pokemon_mapper.dart';
@@ -19,5 +20,10 @@ class PokeApiDataSource extends PokemonDatasource {
         .map((x) => PokeApiToPokemonMapper().pokemonPokeApiToPokemon(x))
         .toList();
     return pokemons;
+  }
+
+  @override
+  Future<PokemonDetail?> getPokemon(int id) async {
+    return null;
   }
 }
