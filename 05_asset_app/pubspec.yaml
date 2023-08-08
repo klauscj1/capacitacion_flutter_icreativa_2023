@@ -1,0 +1,30 @@
+name: asset_app
+description: A new Flutter project.
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ">=3.0.5 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_meedu: ^8.3.1
+  video_player: ^2.5.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/videos/
+    # - assets/videos/2.mp4
+    # - assets/videos/3.mp4
+    # - assets/videos/4.mp4
+    # - assets/videos/5.mp4
+    # - assets/videos/6.mp4
+    # - assets/videos/7.mp4
+    # - assets/videos/8.mp4
