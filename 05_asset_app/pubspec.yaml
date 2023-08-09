@@ -11,6 +11,7 @@ dependencies:
     sdk: flutter
   flutter_meedu: ^8.3.1
   video_player: ^2.5.1
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
@@ -21,6 +22,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/videos/
+    - assets/images/
     # - assets/videos/2.mp4
     # - assets/videos/3.mp4
     # - assets/videos/4.mp4

@@ -25,9 +25,9 @@ class SplashScreen extends StatelessWidget {
       },
       builder: (context, controller) => Scaffold(
         body: Center(
-          child: Text(
-            "Assets App",
-            style: Theme.of(context).textTheme.titleLarge,
+          child: Image.asset(
+            'assets/images/toklog.png',
+            width: 100,
           ),
         ),
       ),
