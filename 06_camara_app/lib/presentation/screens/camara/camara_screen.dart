@@ -1,3 +1,4 @@
+import 'package:camara_app/presentation/widgets/photo_preview.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
@@ -12,46 +13,118 @@ class CamaraScreen extends StatefulWidget {
 }
 
 class _CamaraScreenState extends State<CamaraScreen> {
-  late CameraController controller;
+  CameraController? controller;
+  bool cameraIsMounted = true;
+  int selectedCameraIndex = 0;
+
+  Future _initCameraController(CameraDescription cameraSelected) async {
+    // if (controller != null) {
+    //   await controller!.dispose();
+    //   setState(() {
+    //     cameraIsMounted = false;
+    //   });
+    // }
+    controller = CameraController(cameraSelected, ResolutionPreset.max);
+
+    controller!.addListener(() {
+      if (mounted) {
+        setState(() {
+          cameraIsMounted = true;
+        });
+      }
+      if (controller!.value.hasError) {
+        print("Camera error ${controller!.value.errorDescription}");
+      }
+    });
+
+    try {
+      await controller!.initialize();
+    } on CameraException catch (e) {
+      String errorText = "Error ${e.code}\nError Message ${e.description}";
+      print(errorText);
+    }
+  }
 
   @override
   void initState() {
     super.initState();
-    controller = CameraController(widget.cameras[0], ResolutionPreset.max);
-    controller.initialize().then((_) {
-      if (!mounted) {
-        return;
-      }
-      setState(() {});
-    }).catchError((Object e) {
-      if (e is CameraException) {
-        switch (e.code) {
-          case 'CameraAccessDenied':
-            // Handle access errors here.
-            break;
-          default:
-            // Handle other errors here.
-            break;
-        }
-      }
-    });
+    _initCameraController(widget.cameras[selectedCameraIndex])
+        .then((void v) {});
   }
 
   @override
   void dispose() {
-    controller.dispose();
+    controller!.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (!controller.value.isInitialized) {
-      return Container();
-    }
-    return MaterialApp(
-      home: CameraPreview(
-        controller,
-        child: const Icon(Icons.abc),
+    return Material(
+      child: Stack(
+        children: [
+          SizedBox.expand(
+            child: !cameraIsMounted
+                ? Container()
+                : CameraPreview(
+                    controller!,
+                  ),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: widget.cameras
+                    .map(
+                      (e) => TextButton.icon(
+                        onPressed: () {
+                          setState(() {
+                            selectedCameraIndex = int.parse(e.name);
+                            _initCameraController(
+                                widget.cameras[selectedCameraIndex]);
+                          });
+                        },
+                        icon: const Icon(Icons.camera_alt_outlined),
+                        label: Text(e.name),
+                      ),
+                    )
+                    .toList(),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  MaterialButton(
+                    onPressed: () async {
+                      controller!.takePicture().then((photoFile) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    PhotoPreview(photoUrl: photoFile.path)));
+                      });
+                    },
+                    child: const Text("Tomar foto"),
+                  ),
+                  // MaterialButton(
+                  //   onPressed: () async {
+                  //     await controller!.startVideoRecording();
+                  //   },
+                  //   child: const Text("Grabar"),
+                  // ),
+                  // MaterialButton(
+                  //   onPressed: () async {
+                  //     XFile video = await controller!.stopVideoRecording();
+                  //     print(video.name);
+                  //     print(video.path);
+                  //   },
+                  //   child: const Text("Grabar"),
+                  // ),
+                ],
+              ),
+            ],
+          )
+        ],
       ),
     );
   }
